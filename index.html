@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vanilla Calorie Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="header-main">
+        <h1>Calorie Tracker</h1>
+        <p class="subtitle">Log your daily meals and track your intake</p>
+      </div>
+      <div class="date-selector-wrapper">
+        <label for="activeDateInput">Tracking Date:</label>
+        <input type="date" id="activeDateInput">
+      </div>
+    </header>
+
+    <!-- Daily Metrics Summary Card -->
+    <section class="card summary-card">
+      <div class="summary-top">
+        <h2>Daily Overview</h2>
+        <div class="goal-control">
+          <span>Target: <strong id="goalDisplay">2000</strong> kcal</span>
+          <button id="editGoalBtn" type="button" class="btn-text">Edit Target</button>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-label">Daily Target</span>
+          <span class="stat-value" id="statTarget">2000</span>
+          <span class="stat-unit">kcal</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Consumed</span>
+          <span class="stat-value text-blue" id="statConsumed">0</span>
+          <span class="stat-unit">kcal</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label" id="remainingLabel">Remaining</span>
+          <span class="stat-value text-green" id="statRemaining">2000</span>
+          <span class="stat-unit">kcal</span>
+        </div>
+      </div>
+
+      <!-- Progress Meter -->
+      <div class="progress-section">
+        <div class="progress-info">
+          <span>Progress</span>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Log Meal Form Card -->
+    <section class="card form-card">
+      <h2>Log Food or Meal</h2>
+      <form id="mealForm" novalidate>
+        <div class="form-row">
+          <div class="form-group flex-2">
+            <label for="foodNameInput">Food / Description</label>
+            <input type="text" id="foodNameInput" placeholder="e.g. Grilled Chicken Salad" required>
+          </div>
+          <div class="form-group flex-1">
+            <label for="caloriesInput">Calories (kcal)</label>
+            <input type="number" id="caloriesInput" min="1" max="10000" placeholder="e.g. 450" required>
+          </div>
+          <div class="form-group flex-1">
+            <label for="categoryInput">Meal Category</label>
+            <select id="categoryInput">
+              <option value="breakfast">Breakfast</option>
+              <option value="lunch" selected>Lunch</option>
+              <option value="dinner">Dinner</option>
+              <option value="snack">Snack</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="addMealBtn">+ Add Meal</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Meal Log Lists -->
+    <section class="card logs-card">
+      <div class="logs-header">
+        <h2>Meals for Selected Day</h2>
+        <button type="button" id="clearDayBtn" class="btn-text text-danger">Reset Day</button>
+      </div>
+
+      <div class="categories-container">
+        <!-- Breakfast -->
+        <div class="category-block" id="block-breakfast">
+          <div class="category-header">
+            <h3>🍳 Breakfast</h3>
+            <span class="category-total" id="total-breakfast">0 kcal</span>
+          </div>
+          <ul class="meal-list" id="list-breakfast"></ul>
+        </div>
+
+        <!-- Lunch -->
+        <div class="category-block" id="block-lunch">
+          <div class="category-header">
+            <h3>🥗 Lunch</h3>
+            <span class="category-total" id="total-lunch">0 kcal</span>
+          </div>
+          <ul class="meal-list" id="list-lunch"></ul>
+        </div>
+
+        <!-- Dinner -->
+        <div class="category-block" id="block-dinner">
+          <div class="category-header">
+            <h3>🍲 Dinner</h3>
+            <span class="category-total" id="total-dinner">0 kcal</span>
+          </div>
+          <ul class="meal-list" id="list-dinner"></ul>
+        </div>
+
+        <!-- Snacks -->
+        <div class="category-block" id="block-snack">
+          <div class="category-header">
+            <h3>🍎 Snacks</h3>
+            <span class="category-total" id="total-snack">0 kcal</span>
+          </div>
+          <ul class="meal-list" id="list-snack"></ul>
+        </div>
+      </div>
+
+      <div id="emptyState" class="empty-state">
+        <p>No meals logged for this date yet. Use the form above to add an item.</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
